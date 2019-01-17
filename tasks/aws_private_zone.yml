@@ -1,0 +1,29 @@
+---
+- block:
+  - name: Add IP to private zone
+    local_action:
+      module: route53
+      state: present
+      zone: "{{ route53_subdomain }}"
+      private_zone: yes
+      record: "{{ route53_Arecord }}.{{ route53_subdomain }}"
+      type: A
+      ttl: 1200
+      value: "{{ ec2.tagged_instances[0].private_ip }}"
+      overwrite: yes
+      wait: yes
+
+  - name: Add CNAMES to private zone
+    local_action:
+      module: route53
+      state: present
+      zone: "{{ route53_subdomain }}"
+      private_zone: yes
+      record: "{{ item }}.{{ route53_Arecord }}.{{ route53_subdomain }}"
+      type: CNAME
+      ttl: 3600
+      value: "{{ route53_Arecord }}.{{ route53_subdomain }}"
+    with_items:
+    - "{{ route53_cnames }}"
+  tags: 
+  - route53:private
