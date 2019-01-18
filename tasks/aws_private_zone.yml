@@ -21,6 +21,7 @@
       private_zone: yes
       record: "{{ item }}.{{ route53_Arecord }}.{{ route53_subdomain }}"
       type: CNAME
+      overwrite: yes
       ttl: 3600
       value: "{{ route53_Arecord }}.{{ route53_subdomain }}"
     with_items:

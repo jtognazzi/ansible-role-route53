@@ -9,6 +9,7 @@
       type: A
       ttl: 1200
       value: "{{ ansible_host }}"
+      overwrite: yes
       wait: yes
 
   - name: Add CNAMES to public zone
@@ -19,6 +20,7 @@
       record: "{{ item }}.{{ route53_Arecord }}.{{ route53_subdomain }}"
       type: CNAME
       ttl: 3600
+      overwrite: yes
       value: "{{ route53_Arecord }}.{{ route53_subdomain }}"
     with_items:
     - "{{ route53_cnames }}"

@@ -4,5 +4,7 @@
   - include_tasks: public_zone.yml
 
   - include_tasks: aws_private_zone.yml
-    when: aws_region is not none
+    when: 
+    - aws_region is defined
+    - aws_region is not none
   when: route53_subdomain is not none

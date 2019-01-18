@@ -9,4 +9,5 @@ route53_cnames:
   - preview
   - sitemanager
   - candy-studio
+  - candy-studio-client
   - candy-preview
