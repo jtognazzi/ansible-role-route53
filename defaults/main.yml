@@ -1,5 +1,5 @@
 ---
 # defaults file for ansible-role-route53
-route53_subdomain: null
+route53_zone: null
 route53_Arecord: null
 route53_cnames: null

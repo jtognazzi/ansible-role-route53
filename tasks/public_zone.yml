@@ -4,8 +4,8 @@
     local_action:
       module: route53
       state: present
-      zone: "{{ route53_subdomain }}"
-      record: "{{ route53_Arecord }}.{{ route53_subdomain }}"
+      zone: "{{ route53_zone }}"
+      record: "{{ route53_Arecord }}"
       type: A
       ttl: 1200
       value: "{{ ansible_host }}"
@@ -16,13 +16,11 @@
     local_action:
       module: route53
       state: present
-      zone: "{{ route53_subdomain }}"
-      record: "{{ item }}.{{ route53_Arecord }}.{{ route53_subdomain }}"
+      zone: "{{ route53_zone }}"
+      record: "{{ item }}.{{ route53_Arecord }}"
       type: CNAME
       ttl: 3600
       overwrite: yes
-      value: "{{ route53_Arecord }}.{{ route53_subdomain }}"
+      value: "{{ route53_Arecord }}"
     with_items:
     - "{{ route53_cnames }}"
-  tags: 
-  - route53:public

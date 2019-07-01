@@ -7,4 +7,6 @@
     when: 
     - aws_region is defined
     - aws_region is not none
-  when: route53_subdomain is not none
+  when: 
+  - route53_zone is not none
+  - route53_Arecord is not none

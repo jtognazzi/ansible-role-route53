@@ -4,9 +4,9 @@
     local_action:
       module: route53
       state: present
-      zone: "{{ route53_subdomain }}"
+      zone: "{{ route53_zone }}"
       private_zone: yes
-      record: "{{ route53_Arecord }}.{{ route53_subdomain }}"
+      record: "{{ route53_Arecord }}"
       type: A
       ttl: 1200
       value: "{{ ec2.tagged_instances[0].private_ip }}"
@@ -17,13 +17,13 @@
     local_action:
       module: route53
       state: present
-      zone: "{{ route53_subdomain }}"
+      zone: "{{ route53_zone }}"
       private_zone: yes
-      record: "{{ item }}.{{ route53_Arecord }}.{{ route53_subdomain }}"
+      record: "{{ item }}.{{ route53_Arecord }}"
       type: CNAME
       overwrite: yes
       ttl: 3600
-      value: "{{ route53_Arecord }}.{{ route53_subdomain }}"
+      value: "{{ route53_Arecord }}"
     with_items:
     - "{{ route53_cnames }}"
   tags: 
